@@ -1,123 +1,560 @@
-#include <iostream>
-#include<fstream>
-#include <algorithm>
-#include<string>
-#define statistics 7
-using namespace std;
-struct student{
-    string number;
-    string name;
-    string sex;
-    string phone;
-    int age;
-    double score[7];
-    double ave;
-}a[statistics];
-struct people{
-    string referee;
-    string number1;
-    string name1;
-    string sex1;
-    string phone1;
-    double score[7];
-};
-bool cmp(student s1,student s2)
-{
-    return s1.ave>s2.ave;
+int pin = 13;//定义数字接口13
+int val;//定义变量val
+void setup() {
+    
+    Serial.begin(9600);//设置波特率为9600
+    pinMode(pin,OUTPUT);//设置数字13口为输出接口
 }
-int main() {
-    student t[statistics];
-    people k[statistics];
-    int i,j;
-    ofstream inf("/Users/s20181106278/Desktop/myinf.txt");
-    ifstream onf("/Users/s20181106278/Desktop/onf.txt");
-    ifstream enf("/Users/s20181106278/Desktop/enf.txt");
-    ifstream unf("/Users/s20181106278/Desktop/unf.txt");
-    if(onf.is_open())
+
+
+void loop() {
+    
+    val = Serial.read();//读取指令并赋给val
+    switch (val)
     {
-        for(i=0;i<statistics;++i)
+        case 'a':
         {
-            onf>>a[i].number>>a[i].name>>a[i].sex>>a[i].age>>a[i].phone;
-        }
-        onf.close();
-    }
-    if(unf.is_open())
-    {
-        for(i=0;i<statistics;++i)
-        {
-            unf>>k[i].number1>>k[i].name1>>k[i].sex1>>k[i].phone1;
-        }
-        onf.close();
-    }
-    if(enf.is_open())
-    {
-        for(j=0;j<7;j++)
-        {
-            enf>>k[j].referee;
-        }
-        for(j=0;j<statistics;++j)
-        {
-            for(i=0;i<7;++i)
-            {
-                enf>>a[j].score[i];
-            }
-            enf>>a[j].number;
-        }
-        enf.close();
-    }
-    /*for(i=0;i<statistics;i++)
-        sort(a[i].score,a[i].score+7);*/
-    void sort(int *p,int num)
-    {
-        int i,j,temp;
-        for(i=0;i<num;i++)
-        {
-            for(j=i+1;j<num;j++)
-                if(p[i]<p[j])
-                {
-                    temp=p[i];
-                    p[i]=p[j];
-                    p[j]=temp;
-                }
-        }
-    }
-    void output(int *p,int num)
-    {
-        for(p=a;p<a+10;p++)
-        int i;
-        for(i=0;i<num;i++)
+            Serial.println("a");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
             
-            printf("%d ",*(p+i));
-    }
-    int main()
-    {
-        int a[10];
-        input(a,10);
-        sort(a,10);
-        output(a,10);
-        return 0;
-    }
-    for(j=0;j<statistics;++j)
-    {
-        for(i=1;i<6;++i)
-        {
-            a[j].ave+=a[j].score[i];
+            break;
         }
-        a[j].ave/=5;
-    }
-    sort(a,a+statistics,cmp);
-    if(inf.is_open())
-    {
-        for(int i=0;i<statistics;i++)
+        case 'b':
         {
-            inf<<a[i].number<<" "<<a[i].name<<" "<<a[i].sex<<" "<<a[i].age<<" "<<a[i].phone<<" "<<a[i].ave<<endl;
-            for(j=0;j<7;j++)
+            Serial.println("b");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<3;i++)
             {
-                inf<<a[i].score[j]<<" ";
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
             }
-            inf<<endl;
+            
+            break;
         }
-        inf.close();
+        case 'c':
+        {
+            Serial.println("c");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'd':
+        {
+            Serial.println("d");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'e':
+        {
+            Serial.println("e");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'f':
+        {
+            Serial.println("f");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'g':
+        {
+            Serial.println("g");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'h':
+        {
+            Serial.println("h");//显示字符串
+            for(int i=0;i<4;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'i':
+        {
+            Serial.println("i");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'j':
+        {
+            Serial.println("j");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<3;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'k':
+        {
+            Serial.println("k");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'l':
+        {
+            Serial.println("l");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'm':
+        {
+            Serial.println("m");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'n':
+        {
+            Serial.println("n");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'o':
+        {
+            Serial.println("o");//显示字符串
+            for(int i=0;i<3;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'p':
+        {
+            Serial.println("p");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'q':
+        {
+            Serial.println("q");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'r':
+        {
+            Serial.println("r");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 's':
+        {
+            Serial.println("s");//显示字符串
+            for(int i=0;i<3;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 't':
+        {
+            Serial.println("t");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'u':
+        {
+            Serial.println("u");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'v':
+        {
+            Serial.println("v");//显示字符串
+            for(int i=0;i<3;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'w':
+        {
+            Serial.println("w");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'x':
+        {
+            Serial.println("x");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            
+            break;
+        }
+        case 'y':
+        {
+            Serial.println("y");//显示字符串
+            digitalWrite(pin,HIGH);//点亮
+            delay(5000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            digitalWrite(pin,HIGH);//点亮
+            delay(1000);
+            digitalWrite(pin,LOW);//熄灭
+            delay(1000);
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
+        case 'z':
+        {
+            Serial.println("z");//显示字符串
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(5000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            for(int i=0;i<2;i++)
+            {
+                digitalWrite(pin,HIGH);//点亮
+                delay(1000);
+                digitalWrite(pin,LOW);//熄灭
+                delay(1000);
+            }
+            
+            break;
+        }
     }
-    return 0;
+    
+    
+    
+    /*if(val="hello world")
+     {
+     //h
+     for(int i=0;i<4;i++)
+     {
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     }
+     //e
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     //ll
+     for(int i=0;i<2;i++)
+     {
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     digitalWrite(pin,HIGH);//点亮
+     delay(5000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     for(int j=0;j<2;j++)
+     {
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     }
+     }
+     //o
+     for(int i=0;i<3;i++)
+     {
+     digitalWrite(pin,HIGH);//点亮
+     delay(5000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     }
+     //w
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     for(int i=0;i<2;i++)
+     {
+     digitalWrite(pin,HIGH);//点亮
+     delay(5000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     }
+     //o
+     for(int i=0;i<3;i++)
+     {
+     digitalWrite(pin,HIGH);//点亮
+     delay(5000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     }
+     //r
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     digitalWrite(pin,HIGH);//点亮
+     delay(5000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     //l
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     digitalWrite(pin,HIGH);//点亮
+     delay(5000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     for(int j=0;j<2;j++)
+     {
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     }
+     //d
+     digitalWrite(pin,HIGH);//点亮
+     delay(5000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     digitalWrite(pin,HIGH);//点亮
+     delay(1000);
+     digitalWrite(pin,LOW);//熄灭
+     delay(1000);
+     
+     
+     Serial.println("Hello World!");//显示“Hello World！”字符串
+     }
+     */
 }
