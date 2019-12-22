@@ -403,48 +403,7 @@ void loop() {
             
             break;
         }
-        case 'y':
-        {
-            Serial.println("y");
-            digitalWrite(pin,HIGH);
-            delay(5000);
-            digitalWrite(pin,LOW);
-            delay(1000);
-            digitalWrite(pin,HIGH);
-            delay(1000);
-            digitalWrite(pin,LOW);
-            delay(1000);
-            for(int i=0;i<2;i++)
-            {
-                digitalWrite(pin,HIGH);
-                delay(5000);
-                digitalWrite(pin,LOW);
-                delay(1000);
-            }
-            
-            break;
-        }
-        case 'z':
-        {
-            Serial.println("z");
-            for(int i=0;i<2;i++)
-            {
-                digitalWrite(pin,HIGH);
-                delay(5000);
-                digitalWrite(pin,LOW);
-                delay(1000);
-            }
-            for(int i=0;i<2;i++)
-            {
-                digitalWrite(pin,HIGH);
-                delay(1000);
-                digitalWrite(pin,LOW);
-                delay(1000);
-            }
-            
-            break;
-        }
-    }
+        
     
   
 }
